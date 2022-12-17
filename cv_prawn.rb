@@ -4,6 +4,14 @@ require 'prawn/table'
 Prawn::Fonts::AFM.hide_m17n_warning = true
 image_path = "/Users/orbanbotond/Desktop/Profile\ x\ 300x300.png"
 
+def show_bounds(doc)
+  return unless $show_bounds
+
+  doc.stroke_bounds
+  doc.stroke_axis color: 'FF0000'
+end
+
+
 def draw_sidebar(doc)
   doc.save_graphics_state do
     doc.canvas do
@@ -30,22 +38,26 @@ def section(title, doc)
 end
 
 def sub_section(role, period, company, doc)
-  # doc.define_grid(columns: 2, rows: 1, gutter: 10)
+  y_position = doc.cursor
+  width = doc.bounds.right / 2
+  doc.bounding_box [0, y_position], width: width do
+    show_bounds(doc)
 
-  doc.fill_color($main_color)
-  # doc.grid(0, 0).bounding_box do
-    doc.text role,
-             size: 12,
-             bold: true,
-             align: :left
-  # end
+    doc.fill_color($main_color)
+      doc.text role,
+               size: 12,
+               bold: true,
+               align: :left
+  end
 
-  # doc.grid(0, 1).bounding_box do
+  doc.bounding_box [doc.bounds.right / 2, y_position], width: width do
+    show_bounds(doc)
+
     doc.text period,
              size: 12,
              bold: true,
              align: :right
-  # end
+  end
 
   doc.fill_color($main_emphasized_color)
   doc.text company,
@@ -63,7 +75,8 @@ def draw_page(doc)
     doc.bounding_box [$side_bar_width, doc.bounds.top],
           width: doc.bounds.right - $side_bar_width,
           height: doc.bounds.top do
-      doc.stroke_bounds if $show_bounds
+      show_bounds(doc)
+
       doc.fill_color($main_emphasized_color)
 
       # text_box 'Nonzero Winding Number', at: [50, 215],
@@ -112,16 +125,23 @@ def draw_page(doc)
 end
 
 def draw_vertical_for_work_experience(doc)
-  doc.bounding_box [$side_bar_width - $margin / 2.0, doc.bounds.top],
-        width: 1,
+  doc.bounding_box [$side_bar_width - $margin / 2.0 - 6/2, doc.bounds.top],
+        width: 6,
         height: doc.bounds.top,
         margin: 0 do
-    doc.stroke_bounds if $show_bounds
+    show_bounds(doc)
+
+    doc.stroke_color $main_emphasized_color
+    h = 603
+    doc.stroke_circle [3, h], 3
+    doc.fill_color $main_emphasized_color
+    doc.fill_circle [3, h], 2
+    doc.stroke_line [3, h -3], [3, 320]
   end
 end
 
-# $show_bounds = false
-$show_bounds = true
+$show_bounds = false
+# $show_bounds = true
 $margin = 24
 $leading = 25
 doc = Prawn::Document.new(page_size: "A4", margin: [ $margin, $margin, $margin, $margin ], compress: true)
