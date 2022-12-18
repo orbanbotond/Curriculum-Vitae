@@ -1,6 +1,32 @@
 Prawn::Fonts::AFM.hide_m17n_warning = true
 
 class CurriculumVitae < Prawn::Document
+
+  class CvList
+    def initialize(top_pading, doc)
+      @top_pading = top_pading
+      @doc = doc
+    end
+
+    def bullet
+      @doc.float do
+        @doc.bounding_box [0, @doc.cursor], :width => 10 do
+          @doc.pad_top(@top_pading) do
+            yield
+          end
+        end
+      end
+    end
+
+    def content
+      @doc.bounding_box [10, @doc.cursor], :width => @doc.bounds.right - 10 do
+        @doc.pad_top(@top_pading) do
+          yield
+        end
+      end
+    end
+  end
+
   require 'prawn'
   require 'prawn/table'
 
@@ -166,6 +192,11 @@ private
     stroke_horizontal_rule
   end
 
+  def list(top_pading = 0)
+    yield CvList.new(top_pading, self)
+  end
+
+
   def draw_page
     pad_ratio = 4
     bounding_box [options[:side_bar_width], bounds.top],
@@ -177,25 +208,35 @@ private
 
       section("About Me", 'about_me.jpg') do
         fill_color(options[:main_color])
-        text "Experienced senior software developer with <b>19 years of experience</b>, also having strong experience in leadership and architect skills and experience. Demonstrated history of working in the capital markets industry. Constantly learning, polishing the knowledge, looking at new horizons.", inline_format: true
+        text "Experienced senior software developer with <b>19 years of experience</b>, also having strong experience in leadership and architect skills and experience. Demonstrated history of working in the capital markets industry. Constantly learning, polishing the knowledge, looking at new horizons.", inline_format: true, align: :justify
 
         pad_top(options[:leading] / pad_ratio) do
-          text "I use my expertise to identify & implement clients' needs concerning their software solutions."
+          text "I use my expertise to identify & implement clients' needs concerning their software solutions.", align: :justify
         end
         pad_top(options[:leading] / pad_ratio) do
-          text "<b>Drop me a message</b> if you think my expertise could help your organization!", inline_format: true
+          text "<b>Drop me a message</b> if you think my expertise could help your organization!", inline_format: true, align: :justify
         end
       end
 
       section("Work Experience", 'work_experience.jpg') do
         sub_section("Senior Developer", "Dec 2021 - Aug 2022", "Kwara") do
           text "The application wasn’t gaining serious subscribers due to the lack of security upon registration. Also it was struggling to gain new clients due to lack of visibility of the yearly Interest and Dividends across savings.", align: :justify
-          pad_top(options[:leading] / pad_ratio) do
-            text "• <b>Securing the application</b> by implementing a Multi Factor Authentication using 3rd party authenticator apps as the second factor.", inline_format: true, align: :justify
+
+          list(options[:leading] / pad_ratio) do |list|
+            list.bullet do
+              text "•"
+            end
+            list.content do
+              text "<b>Securing the application</b> by implementing a Multi Factor Authentication using 3rd party authenticator apps as the second factor.", inline_format: true, align: :justify
+            end
+            list.bullet do
+              text "•"
+            end
+            list.content do
+              text "<b>Leveraging the network effect</b> by giving the clients visibility over their Interests and Dividends based on their Savings by implementing a Dividend and Interest Calculator.", inline_format: true, align: :justify
+            end
           end
-          pad_top(options[:leading] / pad_ratio) do
-            text "• <b>Leveraging the network effect</b> by giving the clients visibility over their Interests and Dividends based on their Savings by implementing a Dividend and Interest Calculator.", inline_format: true, align: :justify
-          end
+
           pad_top(options[:leading] / pad_ratio) do
             text "Skills:  RoR Backend, API programming, Rspec, DryRb, Async Jobs, resolving n+1 query problem using distributed databases.", align: :justify
           end
@@ -203,9 +244,16 @@ private
 
         sub_section("Senior Developer", "Apr 2019 - Nov 2021", "Toptal") do
           text "The client was struggling to introduce new feature to the business due to the lack of maintanability of the monolithically organized application.", align: :justify
-          pad_top(options[:leading] / pad_ratio) do
-            text "• <b>Reducing the tech debt and the cognitive effort</b> of components by extracting the business domains from the monolyticall application into smaller services with <b>0 downtime and 0 bugs</b>. Communicate the upcoming technical challenges like business concepts, clarify with the cross functional teams like devops, billing, stakeholders, then analyze the challenge, create spike tickets development tickets prioritize & implement constantly adjust with the extraction team, dockerize the extracted components, cover the new code with rspecs, ensure the CI cycle for the extracted components.", inline_format: true, align: :justify
+
+          list(options[:leading] / pad_ratio) do |list|
+            list.bullet do
+              text "•"
+            end
+            list.content do
+              text "<b>Reducing the tech debt and the cognitive effort</b> of components by extracting the business domains from the monolyticall application into smaller services with <b>0 downtime and 0 bugs</b>. Communicate the upcoming technical challenges like business concepts, clarify with the cross functional teams like devops, billing, stakeholders, then analyze the challenge, create spike tickets development tickets prioritize & implement constantly adjust with the extraction team, dockerize the extracted components, cover the new code with rspecs, ensure the CI cycle for the extracted components.", inline_format: true, align: :justify
+            end
           end
+
           pad_top(options[:leading] / pad_ratio) do
             text "Skills: RoR, Backend API programming, GraphQL, Apollo Federation, Async Jobs, Resolving N+1 query problems, Strong OO programming, Docker, Postgresql, Rspec, Google Cloud.", align: :justify
           end
