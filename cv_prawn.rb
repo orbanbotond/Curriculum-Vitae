@@ -46,8 +46,6 @@ class CurriculumVitae < Prawn::Document
       :bold => File.join(current_dir, "fonts","sans", "notogeorgian", "Bold.ttf"),
     })
     font "Georgian"
-
-    self.image_path = "/Users/orbanbotond/Desktop/Profile\ x\ 300x300.png"
   end
 
   def draw
@@ -59,7 +57,6 @@ class CurriculumVitae < Prawn::Document
 private
 
   attr_accessor :options
-  attr_accessor :image_path
   attr_accessor :current_dir
 
   def default_options
@@ -225,6 +222,26 @@ private
     end
   end
 
+  def draw_picture
+    ratio = (8 / 10)
+    width = options[:side_bar_width] - options[:margin] * 2
+    xp = (options[:side_bar_width] - options[:margin] * 2 - width) / 2
+    yp = bounds.top
+    image File.join(current_dir, "assets", "profile.jpg"), at: [ xp , yp ], width: width
+   
+    x = xp + width / 2.0
+    y = yp -width / 2.0
+
+    stroke_color( options[:sidebar_text_color] )
+    stroke_circle [x, y], width / 2 - 1
+
+    stroke_color( options[:sidebar_color] )
+    old_line_width = self.line_width
+    self.line_width = options[:margin] 
+    stroke_circle [x, y], (width + options[:margin]) / 2
+    self.line_width = old_line_width
+  end
+
   def draw_languages
     sidebar_section("Languages") do
       draw_skill("English", "Proeficient")
@@ -248,16 +265,16 @@ private
     bounding_box [0, bounds.top],
                  width: width,
                  height: bounds.top do
-      # draw_picture
+      draw_picture
 
-      move_down 98
+      move_down 120
 
       font "Georgian", style: :light, size: 9, align: :justify do
         draw_contact_info
         draw_skills
         draw_education
         draw_languages
-        draw_architecture
+        # draw_architecture
       end
     end
   end
