@@ -10,12 +10,14 @@ class CurriculumVitae < Prawn::Document
     super(page_size: options[:page_size], margin: Array.new(4, options[:margin]), compress: true)
     calculate_sidebar
 
+    self.current_dir = File.expand_path(File.dirname(__FILE__))
+
     font_families.update("Georgian" => {
-      :normal => File.join(File.expand_path(File.dirname(__FILE__)), "fonts","sans", "notogeorgian", "Regular.ttf"),
-      :light => File.join(File.expand_path(File.dirname(__FILE__)), "fonts","sans", "notogeorgian", "Light.ttf"),
-      :extra_bold => File.join(File.expand_path(File.dirname(__FILE__)), "fonts","sans", "notogeorgian", "ExtraBold.ttf"),
-      :semi_bold => File.join(File.expand_path(File.dirname(__FILE__)), "fonts","sans", "notogeorgian", "SemiBold.ttf"),
-      :bold => File.join(File.expand_path(File.dirname(__FILE__)), "fonts","sans", "notogeorgian", "Bold.ttf"),
+      :normal => File.join(current_dir, "fonts","sans", "notogeorgian", "Regular.ttf"),
+      :light => File.join(current_dir, "fonts","sans", "notogeorgian", "Light.ttf"),
+      :extra_bold => File.join(current_dir, "fonts","sans", "notogeorgian", "ExtraBold.ttf"),
+      :semi_bold => File.join(current_dir, "fonts","sans", "notogeorgian", "SemiBold.ttf"),
+      :bold => File.join(current_dir, "fonts","sans", "notogeorgian", "Bold.ttf"),
     })
     font "Georgian"
 
@@ -32,6 +34,7 @@ private
 
   attr_accessor :options
   attr_accessor :image_path
+  attr_accessor :current_dir
 
   def default_options
     { show_bounds: false,
@@ -74,11 +77,12 @@ private
     text.upcase
   end
 
-  def section(title)
+  def section(title, path_to_icon)
     fill_color(options[:main_emphasized_color])
     pad_ratio = 2
     pad_top(options[:leading] / pad_ratio) do
       pad_bottom(options[:leading] / pad_ratio) do
+        image File.join(current_dir, "assets", path_to_icon), at: [- 2, cursor + 2], fit: [20, 20]
         indent(20) do
           font "Georgian", style: :bold do
             text titleize(title),
@@ -171,7 +175,7 @@ private
 
       draw_title
 
-      section("About Me") do
+      section("About Me", 'about_me.jpg') do
         fill_color(options[:main_color])
         text "Experienced senior software developer with <b>19 years of experience</b>, also having strong experience in leadership and architect skills and experience. Demonstrated history of working in the capital markets industry. Constantly learning, polishing the knowledge, looking at new horizons.", inline_format: true
 
@@ -183,14 +187,14 @@ private
         end
       end
 
-      section("Work Experience") do
+      section("Work Experience", 'work_experience.jpg') do
         sub_section("Senior Developer", "Dec 2021 - Aug 2022", "Kwara") do
           text "The application wasn’t gaining serious subscribers due to the lack of security upon registration. Also it was struggling to gain new clients due to lack of visibility of the yearly Interest and Dividends across savings.", align: :justify
           pad_top(options[:leading] / pad_ratio) do
-            text "• <b>Securing the application</b> by implementing a Multi Factor Authentication using 3rd party authenticator apps as the second factor.", inline_format: true
+            text "• <b>Securing the application</b> by implementing a Multi Factor Authentication using 3rd party authenticator apps as the second factor.", inline_format: true, align: :justify
           end
           pad_top(options[:leading] / pad_ratio) do
-            text "• <b>Leveraging the network effect</b> by giving the clients visibility over their Interests and Dividends based on their Savings by implementing a Dividend and Interest Calculator.", inline_format: true
+            text "• <b>Leveraging the network effect</b> by giving the clients visibility over their Interests and Dividends based on their Savings by implementing a Dividend and Interest Calculator.", inline_format: true, align: :justify
           end
           pad_top(options[:leading] / pad_ratio) do
             text "Skills:  RoR Backend, API programming, Rspec, DryRb, Async Jobs, resolving n+1 query problem using distributed databases.", align: :justify
@@ -200,7 +204,7 @@ private
         sub_section("Senior Developer", "Apr 2019 - Nov 2021", "Toptal") do
           text "The client was struggling to introduce new feature to the business due to the lack of maintanability of the monolithically organized application.", align: :justify
           pad_top(options[:leading] / pad_ratio) do
-            text "• <b>Reducing the tech debt and the cognitive effort</b> of components by extracting the business domains from the monolyticall application into smaller services with <b>0 downtime and 0 bugs</b>. Communicate the upcoming technical challenges like business concepts, clarify with the cross functional teams like devops, billing, stakeholders, then analyze the challenge, create spike tickets development tickets prioritize & implement constantly adjust with the extraction team, dockerize the extracted components, cover the new code with rspecs, ensure the CI cycle for the extracted components.", inline_format: true
+            text "• <b>Reducing the tech debt and the cognitive effort</b> of components by extracting the business domains from the monolyticall application into smaller services with <b>0 downtime and 0 bugs</b>. Communicate the upcoming technical challenges like business concepts, clarify with the cross functional teams like devops, billing, stakeholders, then analyze the challenge, create spike tickets development tickets prioritize & implement constantly adjust with the extraction team, dockerize the extracted components, cover the new code with rspecs, ensure the CI cycle for the extracted components.", inline_format: true, align: :justify
           end
           pad_top(options[:leading] / pad_ratio) do
             text "Skills: RoR, Backend API programming, GraphQL, Apollo Federation, Async Jobs, Resolving N+1 query problems, Strong OO programming, Docker, Postgresql, Rspec, Google Cloud.", align: :justify
