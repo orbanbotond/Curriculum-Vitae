@@ -69,7 +69,9 @@ private
       page_size: 'A4',
       main_emphasized_color: "3A5180",
       sidebar_color: "40507D",
+      sidebar_text_color: "FFFFFF",
       main_color: "000000",
+      side_bar_pad_ratio: 4,
     }
   end
 
@@ -90,11 +92,172 @@ private
     stroke_axis color: 'FF0000'
   end
 
+  def draw_contact_info
+    sidebar_section("Contact", "contact.jpg") do
+      image File.join(current_dir, "assets", "phone.jpg"), at: [- 2, cursor - 1], width: 10
+      indent(10) do
+        pad_bottom(options[:leading] / options[:side_bar_pad_ratio]) do
+          text "+40 741 182 213"
+        end
+      end
+
+      image File.join(current_dir, "assets", "email.jpg"), at: [- 2, cursor - 1], width: 10
+      indent(10) do
+        pad_bottom(options[:leading] / options[:side_bar_pad_ratio]) do
+          text "<link href='mailto:orbanbotond@gmail.com'>orbanbotond@gmail.com</link>", inline_format: true
+        end
+      end
+
+      image File.join(current_dir, "assets", "location.jpg"), at: [- 2, cursor - 1], width: 10
+      indent(10) do
+        pad_bottom(options[:leading] / options[:side_bar_pad_ratio]) do
+          text "Gheorgheni, Romania"
+        end
+      end
+
+      image File.join(current_dir, "assets", "linkedin.jpg"), at: [- 2, cursor - 1], width: 10
+      indent(10) do
+        pad_bottom(options[:leading] / options[:side_bar_pad_ratio]) do
+          text "<link href='https://www.linkedin.com/in/orbanbotond'>Botond Orban</link>", inline_format: true
+        end
+      end
+    end
+  end
+
+  def draw_skill(skill, years)
+    y_position = cursor
+    width = bounds.right / 2
+
+    bounding_box [0, y_position],
+                 width: width do
+      show_bounds
+
+      text skill,
+           align: :left
+    end
+
+    bounding_box [bounds.right / 2, y_position],
+                 width: width do
+      show_bounds
+
+      text years,
+           align: :right
+    end
+  end
+
+  def sidebar_section(section, path_to_icon = nil)
+    pad_top(options[:leading] / options[:side_bar_pad_ratio]) do
+      pad_bottom(options[:leading] / options[:side_bar_pad_ratio]) do
+        image File.join(current_dir, "assets", path_to_icon), at: [- 2, cursor + 4], fit: [20, 20] if path_to_icon
+        indent(20) do
+          text titleize(section),
+               style: :bold
+             # size: 12
+        end
+      end
+    end
+
+    pad_bottom(options[:leading] / options[:side_bar_pad_ratio]) do
+      yield
+    end
+  end
+
+  def sidebar_sub_section(subsection)
+    pad_top(options[:leading] / options[:side_bar_pad_ratio]) do
+      pad_bottom(options[:leading] / options[:side_bar_pad_ratio]) do
+        text subsection,
+             style: :bold
+      end
+    end
+
+    yield
+  end
+
+  def draw_skills
+    sidebar_section("Skills", "skills.jpg") do
+      sidebar_sub_section("Backend") do
+        draw_skill("Ruby", "13 years")
+        draw_skill("RoR", "13 years")
+        draw_skill("Sql", "23 years")
+        draw_skill("PostgreSQL", "8 years")
+        draw_skill("Mongo", "4 years")
+        draw_skill("GraphQL", "5 years")
+        draw_skill("Rest", "8 years")
+        draw_skill("API", "8 years")
+
+        draw_skill("Elastic", "6 years")
+        draw_skill("Solr", "2 years")
+
+        draw_skill("Kafka", "2 years")
+        draw_skill("RabbitMq", "1 years")
+
+        draw_skill("Docker", "6 years")
+        draw_skill("Kubernetes", "2 years")
+      end
+
+      sidebar_sub_section("Frontend") do
+        draw_skill("Javascript", "18 year")
+        draw_skill("Turbo", "1 year")
+        draw_skill("Hotwire", "1 year")
+        draw_skill("Stimulus", "1 year")
+        draw_skill("React", "5 years")
+        draw_skill("Redux", "5 years")
+        draw_skill("Backbone", "2 years")
+        draw_skill("Bootstrap", "6 years")
+        draw_skill("jQuery", "15 years")
+      end
+    end
+  end
+
+  def draw_education
+    sidebar_section("Education", "education.jpg") do
+      text "Babeș-Bolyai University of Cluj-Napoca", style: :bold, align: :left
+      text "Bachelor in Computer Science, 1998-2002", align: :left
+      text "Masters in Distributed Systems, 2002-2003", align: :left
+    end
+  end
+
+  def draw_architecture
+    sidebar_section("Architectures") do
+      draw_skill("Crud", "12 years")
+      draw_skill("Trailblazer", "5 years")
+      draw_skill("DDD/CQRS", "1 year")
+    end
+  end
+
+  def draw_languages
+    sidebar_section("Languages") do
+      draw_skill("English", "Proeficient")
+      draw_skill("Romanian", "Advanced")
+      draw_skill("Hungarian", "Native")
+    end
+  end
+
   def draw_sidebar
     save_graphics_state do
       canvas do
         fill_color( options[:sidebar_color] )
         fill_rectangle([0, bounds.top], options[:side_bar_width], bounds.top)
+      end
+    end
+
+    fill_color(options[:sidebar_text_color])
+
+    width = options[:side_bar_width] - options[:margin] * 2
+
+    bounding_box [0, bounds.top],
+                 width: width,
+                 height: bounds.top do
+      # draw_picture
+
+      move_down 98
+
+      font "Georgian", style: :light, size: 9, align: :justify do
+        draw_contact_info
+        draw_skills
+        draw_education
+        draw_languages
+        draw_architecture
       end
     end
   end
