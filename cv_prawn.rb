@@ -439,6 +439,7 @@ private
           end
         end
 
+        start_new_page
         sub_section("Senior Developer", "Apr 2019 - Nov 2019", "SwoopMe Inc.") do
           text "The client was a B2B towing company having an inefficient biding algorythm.", align: :justify
 
@@ -462,7 +463,7 @@ private
           end
         end
 
-        sub_section("Head Of Web Platform Development", "Jan 2018 - Sep 2018", "Globacap") do
+        sub_section("Head Of Web Platform", "Jan 2018 - Sep 2018", "Globacap") do
           text "The client a newly founded startup also a trailblazing technology. Globacap’s vision is to tokenize the private markets for small and medium enterprises ang give them similar opportunities like they would be public companies.", align: :justify
 
           list(options[:leading] / pad_ratio) do |list|
@@ -485,7 +486,7 @@ private
           end
         end
 
-        sub_section("Full Stack Ruby and JavaScript Lead Developer", "Aug 2015 - Nov 2017", "Meeteor") do
+        sub_section("Full Stack Lead Developer", "Aug 2015 - Nov 2017", "Meeteor") do
           text "The client was a startup specializing itself on managing meetings.", align: :justify
 
           list(options[:leading] / pad_ratio) do |list|
