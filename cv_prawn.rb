@@ -422,7 +422,7 @@ private
           end
         end
 
-        sub_section("Senior Developer", "Apr 2019 - Nov 2021", "Toptal") do
+        sub_section("Senior Developer", "Nov 2019 - Nov 2021", "Toptal") do
           text "The client was struggling to introduce new feature to the business due to the lack of maintanability of the monolithically organized application.", align: :justify
 
           list(options[:leading] / pad_ratio) do |list|
@@ -438,6 +438,76 @@ private
             text "Skills: RoR, Backend API programming, GraphQL, Apollo Federation, Async Jobs, Resolving N+1 query problems, Strong OO programming, Docker, Postgresql, Rspec, Google Cloud.", align: :justify
           end
         end
+
+        sub_section("Senior Developer", "Apr 2019 - Nov 2019", "SwoopMe Inc.") do
+          text "The client was a B2B towing company having an inefficient biding algorythm.", align: :justify
+
+          list(options[:leading] / pad_ratio) do |list|
+            list.bullet do
+              text "•"
+            end
+            list.content do
+              text "<b>Maximized the profit</b> on the main geolocation based <b>biding algorythm</b> by assigning the towing opportunities to the nearest towing providers. Doing this with 0 bug and 0 downtime.", inline_format: true, align: :justify
+            end
+            list.bullet do
+              text "•"
+            end
+            list.content do
+              text "<b>Reduce the onboarding costs</b> of the new developers by dockerizing the whole development stack.", inline_format: true, align: :justify
+            end
+          end
+
+          pad_top(options[:leading] / pad_ratio) do
+            text "Skills: RoR, Backend API programming, GraphQL, Apollo Federation, Async Jobs, Resolving N+1 query problems, Strong OO programming, Docker, Postgresql, Rspec, Google Cloud.", align: :justify
+          end
+        end
+
+        sub_section("Head Of Web Platform Development", "Jan 2018 - Sep 2018", "Globacap") do
+          text "The client a newly founded startup also a trailblazing technology. Globacap’s vision is to tokenize the private markets for small and medium enterprises ang give them similar opportunities like they would be public companies.", align: :justify
+
+          list(options[:leading] / pad_ratio) do |list|
+            list.bullet do
+              text "•"
+            end
+            list.content do
+              text "<b>Architected</b> the platform from scratch allowing the company to raise its own funding and let the company into the UK financial conduct authority sandbox.", inline_format: true, align: :justify
+            end
+            list.bullet do
+              text "•"
+            end
+            list.content do
+              text "Responsible to implement a web based platform to keep accounting of the investors and deals therefore leting the startup to gain its own SeriesA funding. Leading a team of 6 developers in the Kiev Office. Communicating with the stakeholders, Analysing the requirements, breaking them down into Asana tickets and assigning them to team members, motivating the team. Introducing and upkeeping the code guards code standards, CI pipeline, also being in charge for the deployment of staging/production in the first 6 months.", inline_format: true, align: :justify
+            end
+          end
+
+          pad_top(options[:leading] / pad_ratio) do
+            text "RubyOnRails, DryRb, Trailblazer, React, Flux, Bootstrap, PostgreSql, Docker, Heroku, AWS, System Architecture.", align: :justify
+          end
+        end
+
+        sub_section("Full Stack Ruby and JavaScript Lead Developer", "Aug 2015 - Nov 2017", "Meeteor") do
+          text "The client was a startup specializing itself on managing meetings.", align: :justify
+
+          list(options[:leading] / pad_ratio) do |list|
+            list.bullet do
+              text "•"
+            end
+            list.content do
+              text "<b>Fixing security</b> acrosss the tenants of the platform by implementing well tested policies for roles across the application.", inline_format: true, align: :justify
+            end
+            list.bullet do
+              text "•"
+            end
+            list.content do
+              text "<b>Enabling</b> the users to search across their tasks, learnings, decisions, notes very easily like using apple spotlight by architecting and implementing a <b>full text search</b> across the application using elasticsearch.", inline_format: true, align: :justify
+            end
+          end
+
+          pad_top(options[:leading] / pad_ratio) do
+            text "RubyOnRails, Rspec, DryRb, ElasticSearch, MySql, JQuery, Javascript.", align: :justify
+          end
+        end
+
       end
     end
   end
