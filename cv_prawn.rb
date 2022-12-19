@@ -527,7 +527,6 @@ private
                   margin: 0 do
       show_bounds
 
-      double_circle(chain.first)
 
       chain.each_cons(2).each do |a, b|
         stroke_color options[:main_emphasized_color]
