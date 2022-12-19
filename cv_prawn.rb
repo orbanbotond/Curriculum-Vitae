@@ -50,8 +50,9 @@ class CurriculumVitae < Prawn::Document
 
   def draw
     draw_sidebar
+    draw_vertical_for_work_experience( 0, 331, 539)
     draw_page
-    draw_vertical_for_work_experience
+    draw_vertical_for_work_experience( 0, 329, 591, 786)
   end
 
 private
@@ -376,7 +377,6 @@ private
     yield CvList.new(top_pading, self)
   end
 
-
   def draw_page
     pad_ratio = 4
     bounding_box [options[:side_bar_width], bounds.top],
@@ -440,6 +440,7 @@ private
         end
 
         start_new_page
+
         sub_section("Senior Developer", "Apr 2019 - Nov 2019", "SwoopMe Inc.") do
           text "The client was a B2B towing company having an inefficient biding algorythm.", align: :justify
 
@@ -513,32 +514,30 @@ private
     end
   end
 
-  def draw_vertical_for_work_experience
-    def double_circle(height)
-      stroke_circle [3, height], 3
-      fill_color options[:main_emphasized_color]
-      fill_circle [3, height], 2
-    end
+  def double_circle(height)
+    stroke_circle [3, height], 3
+    fill_color options[:main_emphasized_color]
+    fill_circle [3, height], 2
+  end
 
+  def draw_vertical_for_work_experience(*chain)
     bounding_box [options[:side_bar_width] - options[:margin] / 2.0 - 6/2, bounds.top],
                   width: 6,
                   height: bounds.top,
                   margin: 0 do
       show_bounds
 
-      stroke_color options[:main_emphasized_color]
-      height_1 = 522
-      height_2 = 335
-      double_circle(height_1)
-      stroke_line [3, height_1 -3], [3, height_2]
-      double_circle(height_2 - 3)
-      height_1 = height_2 - 3
-      height_2 = 120
-      stroke_line [3, height_1 -3], [3, height_2]
+      double_circle(chain.first)
+
+      chain.each_cons(2).each do |a, b|
+        stroke_color options[:main_emphasized_color]
+        stroke_line [3, a + 3], [3, b - 3]
+        double_circle(b)
+      end
     end
   end
 end
 
 cv = CurriculumVitae.new()
 cv.draw
-cv.render_file("cv-prawn.pdf")
+cv.render_file("cv-orban-botond.pdf")
