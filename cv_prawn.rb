@@ -50,9 +50,9 @@ class CurriculumVitae < Prawn::Document
 
   def draw
     draw_sidebar
-    draw_vertical_for_work_experience( 0, 331, 539)
+    draw_vertical_for_work_experience( 0, 312, 519)
     draw_page
-    draw_vertical_for_work_experience( 0, 329, 591, 786)
+    draw_vertical_for_work_experience( 0, 342, 604, 786)
   end
 
 private
@@ -409,7 +409,11 @@ private
 
       section("About Me", 'about_me.jpg') do
         fill_color(options[:main_color])
-        text "Experienced senior software developer with <b>19 years of experience</b>, also having strong experience in leadership and architect skills and experience. Demonstrated history of working in the capital markets industry. Constantly learning, polishing the knowledge, looking at new horizons.", inline_format: true, align: :justify
+        text "I am a senior Rails developer / contractor /freelancer with <b>19 years of experience</b> only interested in remote work.", inline_format: true, align: :justify
+
+        pad_top(options[:leading] / pad_ratio) do
+          text "Also having strong experience in leadership and architect skills and experience. Demonstrated history of working in the capital markets industry. Constantly learning, polishing the knowledge, looking at new horizons.", inline_format: true, align: :justify
+        end
 
         pad_top(options[:leading] / pad_ratio) do
           text "I use my expertise to identify & implement clients' needs concerning their software solutions.", align: :justify
@@ -456,7 +460,7 @@ private
           end
 
           pad_top(options[:leading] / pad_ratio) do
-            text "Skills: RoR, Backend API programming, GraphQL, Apollo Federation, Async Jobs, Resolving N+1 query problems, Strong OO programming, Docker, Postgresql, Rspec, Google Cloud.", align: :justify
+            text "Skills: RoR, GraphQL, Apollo Federation, Async Jobs, Resolving N+1 query problems, Strong OO programming, Docker, Postgresql, Rspec, Google Cloud.", align: :justify
           end
         end
 
@@ -481,7 +485,7 @@ private
           end
 
           pad_top(options[:leading] / pad_ratio) do
-            text "Skills: RoR, Backend API programming, GraphQL, Apollo Federation, Async Jobs, Resolving N+1 query problems, Strong OO programming, Docker, Postgresql, Rspec, Google Cloud.", align: :justify
+            text "Skills: RoR, Backend API, Geolocation, Async Jobs, Resolving N+1 query problems, Strong OO programming, Docker, Postgresql, Rspec, Google Cloud.", align: :justify
           end
         end
 
@@ -516,13 +520,19 @@ private
               text "•"
             end
             list.content do
-              text "<b>Fixing security</b> acrosss the tenants of the platform by implementing well tested policies for roles across the application.", inline_format: true, align: :justify
+              text "Reducing the page load speed from <b>12 seconds to 1.2 second</b> by introducing a custom DSL for field level caching of AR thus caching based only on what is displayed.", inline_format: true, align: :justify
             end
             list.bullet do
               text "•"
             end
             list.content do
-              text "<b>Enabling</b> the users to search across their tasks, learnings, decisions, notes very easily like using apple spotlight by architecting and implementing a <b>full text search</b> across the application using elasticsearch.", inline_format: true, align: :justify
+              text "Decrease content successfull search time to <b>1.5 second</b> by introducing the ability to search across the tasks, learnings, decisions, notes very easily similar to apple spotlight by architecting and implementing a <b>full text search</b> across the application using elasticsearch.", inline_format: true, align: :justify
+            end
+            list.bullet do
+              text "•"
+            end
+            list.content do
+              text "<b>Fixing security</b> acrosss the tenants of the platform by implementing well tested policies for roles across the application.", inline_format: true, align: :justify
             end
           end
 
