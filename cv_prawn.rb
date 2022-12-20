@@ -155,11 +155,11 @@ private
   def sidebar_section(section, path_to_icon = nil)
     pad_top(options[:leading] / options[:side_bar_pad_ratio]) do
       pad_bottom(options[:leading] / options[:side_bar_pad_ratio]) do
-        image File.join(current_dir, "assets", path_to_icon), at: [- 2, cursor + 4], fit: [20, 20] if path_to_icon
+        image File.join(current_dir, "assets", path_to_icon), at: [- 2, cursor + 2], fit: [20, 20] if path_to_icon
         indent(20) do
           text titleize(section),
-               style: :bold
-             # size: 12
+               style: :bold,
+               size: 12
         end
       end
     end
@@ -409,22 +409,19 @@ private
 
       section("About Me", 'about_me.jpg') do
         fill_color(options[:main_color])
-        text "I am a senior Rails developer / contractor /freelancer with <b>19 years of experience</b> only interested in remote work.", inline_format: true, align: :justify
+        text "I am a Ruby On Rails architect / contractor /freelancer with <b>19+ years of experience</b> only interested in remote work.", inline_format: true, align: :justify
 
         pad_top(options[:leading] / pad_ratio) do
-          text "Also having strong experience in leadership and architect skills and experience. Demonstrated history of working in the capital markets industry. Constantly learning, polishing the knowledge, looking at new horizons.", inline_format: true, align: :justify
+          text "I use my expertise to identify & implement clients' needs concerning their software solutions. Constantly learning, polishing the knowledge, looking at new horizons.", align: :justify
         end
 
-        pad_top(options[:leading] / pad_ratio) do
-          text "I use my expertise to identify & implement clients' needs concerning their software solutions.", align: :justify
-        end
         pad_top(options[:leading] / pad_ratio) do
           text "<b>Drop me a message</b> if you think my expertise could help your organization!", inline_format: true, align: :justify
         end
       end
 
       section("Work Experience", 'work_experience.jpg') do
-        sub_section("Senior Developer", "Dec 2021 - Aug 2022", "Kwara") do
+        sub_section("Senior Ruby Developer", "Dec 2021 - Aug 2022", "Kwara") do
           text "The application wasn’t gaining serious subscribers due to the lack of security upon registration. Also it was struggling to gain new clients due to lack of visibility of the yearly Interest and Dividends across savings.", align: :justify
 
           list(options[:leading] / pad_ratio) do |list|
@@ -432,13 +429,13 @@ private
               text "•"
             end
             list.content do
-              text "<b>Securing the application</b> by implementing a Multi Factor Authentication using 3rd party authenticator apps as the second factor.", inline_format: true, align: :justify
+              text "<b>Secured the application</b> by implementing a Multi Factor Authentication using 3rd party authenticator apps as the second factor.", inline_format: true, align: :justify
             end
             list.bullet do
               text "•"
             end
             list.content do
-              text "<b>Leveraging the network effect</b> by giving the clients visibility over their Interests and Dividends based on their Savings by implementing a Dividend and Interest Calculator.", inline_format: true, align: :justify
+              text "<b>Leveraged the network effect</b> by giving the clients visibility over their Interests and Dividends based on their Savings by implementing a Dividend and Interest Calculator.", inline_format: true, align: :justify
             end
           end
 
@@ -447,7 +444,7 @@ private
           end
         end
 
-        sub_section("Senior Developer", "Nov 2019 - Nov 2021", "Toptal") do
+        sub_section("Senior Ruby Developer", "Nov 2019 - Nov 2021", "Toptal") do
           text "The client was struggling to introduce new feature to the business due to the lack of maintanability of the monolithically organized application.", align: :justify
 
           list(options[:leading] / pad_ratio) do |list|
@@ -455,7 +452,7 @@ private
               text "•"
             end
             list.content do
-              text "<b>Reducing the tech debt and the cognitive effort</b> of components by extracting the business domains from the monolyticall application into smaller services with <b>0 downtime and 0 bugs</b>. Communicate the upcoming technical challenges like business concepts, clarify with the cross functional teams like devops, billing, stakeholders, then analyze the challenge, create spike tickets development tickets prioritize & implement constantly adjust with the extraction team, dockerize the extracted components, cover the new code with rspecs, ensure the CI cycle for the extracted components.", inline_format: true, align: :justify
+              text "<b>Reduced the tech debt and the cognitive effort</b> by extracting the billing bounded context from the monolyticall application. Doing all this with <b>0 downtime and 0 bugs</b>.", inline_format: true, align: :justify
             end
           end
 
@@ -466,7 +463,7 @@ private
 
         start_new_page
 
-        sub_section("Senior Developer", "Apr 2019 - Nov 2019", "SwoopMe Inc.") do
+        sub_section("Senior Ruby Developer", "Apr 2019 - Nov 2019", "SwoopMe Inc.") do
           text "The client was a B2B towing company having an inefficient biding algorythm.", align: :justify
 
           list(options[:leading] / pad_ratio) do |list|
@@ -480,7 +477,7 @@ private
               text "•"
             end
             list.content do
-              text "<b>Reduce the onboarding costs</b> of the new developers by dockerizing the whole development stack.", inline_format: true, align: :justify
+              text "<b>Reduced the onboarding costs</b> of the new developers <b>to half day</b> dockerizing the whole development stack.", inline_format: true, align: :justify
             end
           end
 
@@ -497,13 +494,13 @@ private
               text "•"
             end
             list.content do
-              text "<b>Architected</b> the platform from scratch allowing the company to raise its own funding and let the company into the UK financial conduct authority sandbox.", inline_format: true, align: :justify
+              text "<b>Architected</b> the platform from scratch using Trailblazer on top of RoR, allowing the company to raise its own funding and let the company into the UK financial conduct authority sandbox.", inline_format: true, align: :justify
             end
             list.bullet do
               text "•"
             end
             list.content do
-              text "Responsible to implement a web based platform to keep accounting of the investors and deals therefore leting the startup to gain its own SeriesA funding. Leading a team of 6 developers in the Kiev Office. Communicating with the stakeholders, Analysing the requirements, breaking them down into Asana tickets and assigning them to team members, motivating the team. Introducing and upkeeping the code guards code standards, CI pipeline, also being in charge for the deployment of staging/production in the first 6 months.", inline_format: true, align: :justify
+              text "<b>Led a remote team of 6</b> developers in achieving the timeline and milestones of the project. Set up a code quality/deployment guards. Being responsible for the scrum process.", inline_format: true, align: :justify
             end
           end
 
@@ -520,19 +517,19 @@ private
               text "•"
             end
             list.content do
-              text "Reducing the page load speed from <b>12 seconds to 1.2 second</b> by introducing a custom DSL for field level caching of AR thus caching based only on what is displayed.", inline_format: true, align: :justify
+              text "<b>Reduced the page load speed from 12 seconds to 1.2 second</b> by introducing a custom DSL for field level caching of AR thus caching based only on what is displayed.", inline_format: true, align: :justify
             end
             list.bullet do
               text "•"
             end
             list.content do
-              text "Decrease content successfull search time to <b>1.5 second</b> by introducing the ability to search across the tasks, learnings, decisions, notes very easily similar to apple spotlight by architecting and implementing a <b>full text search</b> across the application using elasticsearch.", inline_format: true, align: :justify
+              text "<b>Achieved a search accuracy of 95%</b> by introducing a full text search index for the tasks, learnings, decisions, notes similar to apple spotlight.", inline_format: true, align: :justify
             end
             list.bullet do
               text "•"
             end
             list.content do
-              text "<b>Fixing security</b> acrosss the tenants of the platform by implementing well tested policies for roles across the application.", inline_format: true, align: :justify
+              text "<b>Fixed security 100%</b> acrosss the tenants of the platform by implementing well tested policies for roles across the application.", inline_format: true, align: :justify
             end
           end
 
