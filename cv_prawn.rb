@@ -119,12 +119,21 @@ private
           text "<link href='https://www.linkedin.com/in/orbanbotond'>Botond Orban</link>", inline_format: true
         end
       end
+
+      image File.join(current_dir, "assets", "skype.jpg"), at: [- 2, cursor - 1], width: 10
+      indent(10) do
+        pad_bottom(options[:leading] / options[:side_bar_pad_ratio]) do
+          text "<link href='skype:orbanbotond?chat'>orbanbotond</link>", inline_format: true
+        end
+      end
+
     end
   end
 
   def draw_skill(skill, years)
     y_position = cursor
     width = bounds.right / 2
+    years = years.end_with?('year') ? years + Prawn::Text::NBSP + Prawn::Text::NBSP : years
 
     bounding_box [0, y_position],
                  width: width do
@@ -187,14 +196,14 @@ private
         draw_skill("Solr", "2 years")
 
         draw_skill("Kafka", "2 years")
-        draw_skill("RabbitMq", "1 years")
+        draw_skill("RabbitMq", "1 year")
 
         draw_skill("Docker", "6 years")
         draw_skill("Kubernetes", "2 years")
       end
 
       sidebar_sub_section("Frontend") do
-        draw_skill("Javascript", "18 year")
+        draw_skill("Javascript", "18 years")
         draw_skill("Turbo", "1 year")
         draw_skill("Hotwire", "1 year")
         draw_skill("Stimulus", "1 year")
@@ -483,7 +492,7 @@ private
           end
 
           pad_top(options[:leading] / pad_ratio) do
-            text "RubyOnRails, DryRb, Trailblazer, React, Flux, Bootstrap, PostgreSql, Docker, Heroku, AWS, System Architecture.", align: :justify
+            text "Skills: RubyOnRails, DryRb, Trailblazer, React, Flux, Bootstrap, PostgreSql, Docker, Heroku, AWS, System Architecture.", align: :justify
           end
         end
 
@@ -506,10 +515,9 @@ private
           end
 
           pad_top(options[:leading] / pad_ratio) do
-            text "RubyOnRails, Rspec, DryRb, ElasticSearch, MySql, JQuery, Javascript.", align: :justify
+            text "Skills: RubyOnRails, Rspec, DryRb, ElasticSearch, MySql, JQuery, Javascript.", align: :justify
           end
         end
-
       end
     end
   end
