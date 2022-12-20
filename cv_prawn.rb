@@ -217,10 +217,22 @@ private
   end
 
   def draw_education
+    pad_ratio = 2
+
     sidebar_section("Education", "education.jpg") do
-      text "Babeș-Bolyai University of Cluj-Napoca", style: :bold, align: :left
-      text "Bachelor in Computer Science, 1998-2002", align: :left
-      text "Masters in Distributed Systems, 2002-2003", align: :left
+      text "Babeș-Bolyai University", style: :bold, align: :left
+      font "Georgian", style: :light, size: 8 do
+        text "Bachelor in Computer Science", align: :left
+        text "Cluj-Napoca, 1998-2002", align: :left
+      end
+
+      pad_top(options[:leading] / pad_ratio) do
+        text "Babeș-Bolyai University", style: :bold, align: :left
+        font "Georgian", style: :light, size: 8 do
+          text "Masters in Distributed Systems", align: :left
+          text "Cluj-Napoca, 2002-2003", align: :left
+        end
+      end
     end
   end
 
