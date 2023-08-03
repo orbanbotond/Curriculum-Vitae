@@ -50,9 +50,9 @@ class CurriculumVitae < Prawn::Document
 
   def draw
     draw_sidebar
-    draw_vertical_for_work_experience( 0, 312, 519)
+    draw_vertical_for_work_experience( 0, 390, 565, 183)
     draw_page
-    draw_vertical_for_work_experience( 0, 342, 604, 786)
+    draw_vertical_for_work_experience( 0, 382, 604, 786)
   end
 
 private
@@ -240,7 +240,7 @@ private
     sidebar_section("Architectures") do
       draw_skill("Crud", "12 years")
       draw_skill("Trailblazer", "5 years")
-      draw_skill("DDD/CQRS", "1 year")
+      draw_skill("CQRS/Event sourcing", "1 year")
     end
   end
 
@@ -421,6 +421,23 @@ private
       end
 
       section("Work Experience", 'work_experience.jpg') do
+        sub_section("Senior Ruby Developer", "Febr 2023 - July 2023", "Ifad/United Nations") do
+          text "The old project completion reporting system wan't helping project stakeholders effectively with their reviews.", align: :justify
+
+          list(options[:leading] / pad_ratio) do |list|
+            list.bullet do
+              text "•"
+            end
+            list.content do
+              text "<b>Implemented a new PCR</b> by supporting both the new and old PCR in the same time for different projects. It consisted of mail, report, rating, reviewing and workflow alltogether. By doing this I introduces a new general feature versioning system for multiple versions of the same feature to be used systemwise.", inline_format: true, align: :justify
+            end
+          end
+
+          pad_top(options[:leading] / pad_ratio) do
+            text "Skills:  RoR Backend, Strong OO, DDD, Rspec, DryRb, Async Jobs, resolving n+1 query problem. Devops.", align: :justify
+          end
+        end
+
         sub_section("Senior Ruby Developer", "Dec 2021 - Aug 2022", "Kwara") do
           text "The application wasn’t gaining serious subscribers due to the lack of security upon registration. Also it was struggling to gain new clients due to lack of visibility of the yearly Interest and Dividends across savings.", align: :justify
 
