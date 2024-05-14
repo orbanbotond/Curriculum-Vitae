@@ -50,9 +50,9 @@ class CurriculumVitae < Prawn::Document
 
   def draw
     draw_sidebar
-    draw_vertical_for_work_experience( 0, 390, 565, 183)
+    draw_vertical_line_for_work_experience( 0, 244, 419, 566)
     draw_page
-    draw_vertical_for_work_experience( 0, 382, 604, 786)
+    draw_vertical_line_for_work_experience( 0, 222, 444, 624, 785)
   end
 
 private
@@ -183,14 +183,14 @@ private
   def draw_skills
     sidebar_section("Skills", "skills.jpg") do
       sidebar_sub_section("Backend") do
-        draw_skill("Ruby", "13 years")
-        draw_skill("RoR", "13 years")
-        draw_skill("Sql", "23 years")
-        draw_skill("PostgreSQL", "8 years")
+        draw_skill("Ruby", "14 years")
+        draw_skill("RoR", "14 years")
+        draw_skill("Sql", "24 years")
+        draw_skill("PostgreSQL", "9 years")
         draw_skill("Mongo", "4 years")
         draw_skill("GraphQL", "5 years")
-        draw_skill("Rest", "8 years")
-        draw_skill("API", "8 years")
+        draw_skill("Rest", "9 years")
+        draw_skill("API", "9 years")
 
         draw_skill("Elastic", "6 years")
         draw_skill("Solr", "2 years")
@@ -421,6 +421,23 @@ private
       end
 
       section("Work Experience", 'work_experience.jpg') do
+        sub_section("Senior Ruby Developer", "Aug 2023 - May 2024", "Ifad/United Nations") do
+          text "The development of the project was stalled, gems were outdated. Adding new features was super risky and hard to do.", align: :justify
+
+          list(options[:leading] / pad_ratio) do |list|
+            list.bullet do
+              text "•"
+            end
+            list.content do
+              text "<b>Migrating the project to the latest Rails 7</b> by migrating the needed gems as well. Deploying to sandbox/staging/production by ensuring 0 downtime.", inline_format: true, align: :justify
+            end
+          end
+
+          pad_top(options[:leading] / pad_ratio) do
+            text "Skills:  RoR Backend, Strong OO, DDD, Rspec, DryRb, Async Jobs, resolving n+1 query problem. Devops.", align: :justify
+          end
+        end
+
         sub_section("Senior Ruby Developer", "Febr 2023 - July 2023", "Ifad/United Nations") do
           text "The old project completion reporting system wan't helping project stakeholders effectively with their reviews.", align: :justify
 
@@ -461,6 +478,8 @@ private
           end
         end
 
+        start_new_page
+
         sub_section("Senior Ruby Developer", "Nov 2019 - Nov 2021", "Toptal") do
           text "The client was struggling to introduce new feature to the business due to the lack of maintanability of the monolithically organized application.", align: :justify
 
@@ -477,8 +496,6 @@ private
             text "Skills: RoR, GraphQL, Apollo Federation, Async Jobs, Resolving N+1 query problems, Strong OO programming, Docker, Postgresql, Rspec, Google Cloud.", align: :justify
           end
         end
-
-        start_new_page
 
         sub_section("Senior Ruby Developer", "Apr 2019 - Nov 2019", "SwoopMe Inc.") do
           text "The client was a B2B towing company having an inefficient biding algorythm.", align: :justify
@@ -564,7 +581,7 @@ private
     fill_circle [3, height], 2
   end
 
-  def draw_vertical_for_work_experience(*chain)
+  def draw_vertical_line_for_work_experience(*chain)
     bounding_box [options[:side_bar_width] - options[:margin] / 2.0 - 6/2, bounds.top],
                   width: 6,
                   height: bounds.top,
