@@ -50,9 +50,7 @@ class CurriculumVitae < Prawn::Document
 
   def draw
     draw_sidebar
-    draw_vertical_line_for_work_experience( 0, 244, 419, 566)
-    draw_page
-    draw_vertical_line_for_work_experience( 0, 222, 444, 624, 785)
+    draw_pages
   end
 
 private
@@ -398,7 +396,7 @@ private
     yield CvList.new(top_pading, self)
   end
 
-  def draw_page
+  def draw_pages
     pad_ratio = 4
     bounding_box [options[:side_bar_width], bounds.top],
                  width: bounds.right - options[:side_bar_width],
@@ -421,6 +419,29 @@ private
       end
 
       section("Work Experience", 'work_experience.jpg') do
+        sub_section("Senior Ruby Developer", "June 2024 - January 2025", "Ifad/United Nations") do
+          text "A generic process and document management a small CMS like system, where nothing is hardcoded, everything is customizable", align: :justify
+
+          list(options[:leading] / pad_ratio) do |list|
+            list.bullet do
+              text "•"
+            end
+            list.content do
+              text "<b>Implementing the Generic Templating System With Support for All the Widgets including Tables and Logical Framework.", inline_format: true, align: :justify
+            end
+            list.bullet do
+              text "•"
+            end
+            list.content do
+              text "<b>Implementing the Logical Framework and its integration.", inline_format: true, align: :justify
+            end
+          end
+
+          pad_top(options[:leading] / pad_ratio) do
+            text "Skills:  RoR Backend, Strong OO, DDD, Rspec, DryRb, Async Jobs, resolving n+1 query problem. Devops.", align: :justify
+          end
+        end
+
         sub_section("Senior Ruby Developer", "Aug 2023 - May 2024", "Ifad/United Nations") do
           text "The development of the project was stalled, gems were outdated. Adding new features was super risky and hard to do.", align: :justify
 
@@ -455,6 +476,10 @@ private
           end
         end
 
+        draw_vertical_line_for_work_experience( 100, 250, 400, 566)
+
+        start_new_page
+
         sub_section("Senior Ruby Developer", "Dec 2021 - Aug 2022", "Kwara") do
           text "The application wasn’t gaining serious subscribers due to the lack of security upon registration. Also it was struggling to gain new clients due to lack of visibility of the yearly Interest and Dividends across savings.", align: :justify
 
@@ -477,8 +502,6 @@ private
             text "Skills:  RoR Backend, API programming, Rspec, DryRb, Async Jobs, resolving n+1 query problem using distributed databases.", align: :justify
           end
         end
-
-        start_new_page
 
         sub_section("Senior Ruby Developer", "Nov 2019 - Nov 2021", "Toptal") do
           text "The client was struggling to introduce new feature to the business due to the lack of maintanability of the monolithically organized application.", align: :justify
@@ -543,6 +566,10 @@ private
           end
         end
 
+        draw_vertical_line_for_work_experience( 0, 234, 415, 578, 785)
+
+        start_new_page
+
         sub_section("Full Stack Lead Developer", "Aug 2015 - Nov 2017", "Meeteor") do
           text "The client was a startup specializing itself on managing meetings.", align: :justify
 
@@ -571,6 +598,8 @@ private
             text "Skills: RubyOnRails, Rspec, DryRb, ElasticSearch, MySql, JQuery, Javascript.", align: :justify
           end
         end
+
+        draw_vertical_line_for_work_experience( 600, 785)
       end
     end
   end
@@ -582,12 +611,12 @@ private
   end
 
   def draw_vertical_line_for_work_experience(*chain)
-    bounding_box [options[:side_bar_width] - options[:margin] / 2.0 - 6/2, bounds.top],
+    # bounding_box [options[:side_bar_width] - options[:margin] / 2.0 - 6/2, bounds.top],
+    bounding_box [0 - options[:margin] / 2.0 - 6/2, bounds.top],
                   width: 6,
                   height: bounds.top,
                   margin: 0 do
       show_bounds
-
 
       chain.each_cons(2).each do |a, b|
         stroke_color options[:main_emphasized_color]
