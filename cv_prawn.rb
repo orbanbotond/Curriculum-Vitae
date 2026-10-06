@@ -181,10 +181,10 @@ private
   def draw_skills
     sidebar_section("Skills", "skills.jpg") do
       sidebar_sub_section("Backend") do
-        draw_skill("Ruby", "14 years")
-        draw_skill("RoR", "14 years")
-        draw_skill("Sql", "24 years")
+        draw_skill("Ruby", "15 years")
+        draw_skill("RoR", "15 years")
         draw_skill("PostgreSQL", "9 years")
+        draw_skill("Sqlite", "3 years")
         draw_skill("Mongo", "4 years")
         draw_skill("GraphQL", "5 years")
         draw_skill("Rest", "9 years")
@@ -202,9 +202,9 @@ private
 
       sidebar_sub_section("Frontend") do
         draw_skill("Javascript", "18 years")
-        draw_skill("Turbo", "1 year")
-        draw_skill("Hotwire", "1 year")
-        draw_skill("Stimulus", "1 year")
+        draw_skill("Turbo", "2 year")
+        draw_skill("Hotwire", "2 year")
+        draw_skill("Stimulus", "3 year")
         draw_skill("React", "5 years")
         draw_skill("Redux", "5 years")
         draw_skill("Backbone", "2 years")
@@ -236,21 +236,21 @@ private
 
   def draw_architecture
     sidebar_section("Architectures") do
-      draw_skill("Crud", "12 years")
+      draw_skill("Crud", "14 years")
       draw_skill("Trailblazer", "5 years")
       draw_skill("CQRS/Event sourcing", "1 year")
     end
   end
 
   def draw_picture
-    ratio = (8 / 10)
+    # ratio = (8 / 10)
     width = options[:side_bar_width] - options[:margin] * 2
     xp = (options[:side_bar_width] - options[:margin] * 2 - width) / 2
     yp = bounds.top
     image File.join(current_dir, "assets", "profile.jpg"), at: [ xp , yp ], width: width
    
     x = xp + width / 2.0
-    y = yp -width / 2.0
+    y = yp - width / 2.0
 
     stroke_color( options[:sidebar_text_color] )
     stroke_circle [x, y], width / 2 - 1
@@ -407,7 +407,7 @@ private
 
       section("About Me", 'about_me.jpg') do
         fill_color(options[:main_color])
-        text "I am a Ruby On Rails architect / contractor /freelancer with <b>19+ years of experience</b> only interested in remote work.", inline_format: true, align: :justify
+        text "I am a Ruby On Rails architect / contractor /freelancer with <b>23+ years of experience</b> only interested in remote work.", inline_format: true, align: :justify
 
         pad_top(options[:leading] / pad_ratio) do
           text "I use my expertise to identify & implement clients' needs concerning their software solutions. Constantly learning, polishing the knowledge, looking at new horizons.", align: :justify
@@ -419,6 +419,35 @@ private
       end
 
       section("Work Experience", 'work_experience.jpg') do
+        sub_section("Architec/Senior Developer", "February 2025 - Sept 2026", "Logic Optimum Ltd.") do
+          text "Full stack developer, wearing all hats: UX/UI, backend, devops", align: :justify
+
+          list(options[:leading] / pad_ratio) do |list|
+            list.bullet do
+              text "•"
+            end
+            list.content do
+              text "<b>Implementing a generic pub/sub</b> with html API callbacks.", inline_format: true, align: :justify
+            end
+            list.bullet do
+              text "•"
+            end
+            list.content do
+              text "<b>Implementing an sqlite based miniCMS</b> powering the site of logicoptimum.ro", inline_format: true, align: :justify
+            end
+            list.bullet do
+              text "•"
+            end
+            list.content do
+              text "<b>Implementing a mini task Management</b> with real time collaboration feature. Implementing <b>refferrals/discounts/invoicing/legal/automated recurring payments/complex VAT</b> calculation policy, within EU both for <b>B2B and B2C</b> ", inline_format: true, align: :justify
+            end
+          end
+
+          pad_top(options[:leading] / pad_ratio) do
+            text "Skills:  RoR Full Stack, Strong OO, Hotwire, Full Turbo Stack, Kamal, Terraform.", align: :justify
+          end
+        end
+
         sub_section("Senior Ruby Developer", "June 2024 - January 2025", "Ifad/United Nations") do
           text "A generic process and document management a small CMS like system, where nothing is hardcoded, everything is customizable", align: :justify
 
@@ -459,6 +488,10 @@ private
           end
         end
 
+        draw_vertical_line_for_work_experience( 100, 225, 392, 566)
+
+        start_new_page
+
         sub_section("Senior Ruby Developer", "Febr 2023 - July 2023", "Ifad/United Nations") do
           text "The old project completion reporting system wan't helping project stakeholders effectively with their reviews.", align: :justify
 
@@ -475,10 +508,6 @@ private
             text "Skills:  RoR Backend, Strong OO, DDD, Rspec, DryRb, Async Jobs, resolving n+1 query problem. Devops.", align: :justify
           end
         end
-
-        draw_vertical_line_for_work_experience( 100, 250, 400, 566)
-
-        start_new_page
 
         sub_section("Senior Ruby Developer", "Dec 2021 - Aug 2022", "Kwara") do
           text "The application wasn’t gaining serious subscribers due to the lack of security upon registration. Also it was struggling to gain new clients due to lack of visibility of the yearly Interest and Dividends across savings.", align: :justify
@@ -543,6 +572,10 @@ private
           end
         end
 
+        draw_vertical_line_for_work_experience( 100, 240, 402, 610, 785)
+
+        start_new_page
+
         sub_section("Head Of Web Platform", "Jan 2018 - Sep 2018", "Globacap") do
           text "The client a newly founded startup also a trailblazing technology. Globacap’s vision is to tokenize the private markets for small and medium enterprises ang give them similar opportunities like they would be public companies.", align: :justify
 
@@ -565,10 +598,6 @@ private
             text "Skills: RubyOnRails, DryRb, Trailblazer, React, Flux, Bootstrap, PostgreSql, Docker, Heroku, AWS, System Architecture.", align: :justify
           end
         end
-
-        draw_vertical_line_for_work_experience( 0, 234, 415, 578, 785)
-
-        start_new_page
 
         sub_section("Full Stack Lead Developer", "Aug 2015 - Nov 2017", "Meeteor") do
           text "The client was a startup specializing itself on managing meetings.", align: :justify
@@ -599,7 +628,7 @@ private
           end
         end
 
-        draw_vertical_line_for_work_experience( 600, 785)
+        draw_vertical_line_for_work_experience( 380, 563, 785)
       end
     end
   end
